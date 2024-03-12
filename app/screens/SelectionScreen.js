@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, Image } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons'
 
 function SelectionScreen(props) {
@@ -8,11 +8,13 @@ function SelectionScreen(props) {
             style={styles.bacground}
             source={require("../assets/SelectionScreen.png")}>
 
+            <Image style={styles.logo} source={require("../assets/Text.png")}/>
+
             <View style={styles.icon}>
-                <MaterialIcons name="image-search" size={100} color="black" />
+                <MaterialIcons name="image-search" size={100} color="white" />
 
                 <View>
-                    <AntDesign name="camera" size={100} color="black" />
+                    <AntDesign name="camera" size={100} color="white" />
                 </View>
 
             </View>
@@ -22,15 +24,22 @@ function SelectionScreen(props) {
 
 const styles = StyleSheet.create({
     bacground: {
-        flex: 1
+        flex: 1,
+    },
+    logo: {
+        width: 230,
+        height: 170,
+        top: '2%',
+        margin: '15%'
     },
     icon: {
         flex: 1,
         flexDirection: 'row-reverse',
         alignItems: 'flex-end',
-        justifyContent: 'space-evenly',
-        marginBottom: '10%'
-    }
+        justifyContent: 'space-around',
+        marginBottom: 30,
+    },
+
 })
 
 export default SelectionScreen;
