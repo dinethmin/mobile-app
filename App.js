@@ -7,8 +7,8 @@ import ScannernScreen from './app/screens/ScannerScreen';
 export default function App() {
   return (
     //<WelcomeScreen/>
-    <SelectionScreen/>
-    //<ScannernScreen/>
+    //<SelectionScreen/>
+    <ScannernScreen/>
   );
 }
 
