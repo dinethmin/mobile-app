@@ -14,8 +14,6 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import Config from 'react-native-config';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
-
 
 export const { height, width } = Dimensions.get('window');
 
@@ -28,7 +26,6 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [permission, setPermission] = useState(null);
-  const [fontsLoaded] = useFonts({Lato_900Black,});
 
   useEffect(() => {
     (async () => {
@@ -130,10 +127,6 @@ const App = () => {
     setImage('');
   };
 
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>; 
-  }
-
   return (
     <View style={[backgroundStyle, styles.outer]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -142,6 +135,9 @@ const App = () => {
         style={{height: height, width: width}}
       />
       <Text style={styles.title}>{'Rice Disease \nPrediction'}</Text>
+      <TouchableOpacity onPress={clearOutput} style={styles.clearStyle}>
+        <Text style={styles.ctext}>Clear</Text>
+      </TouchableOpacity>
       {(image?.length && (
         <Image source={{uri: image}} style={styles.imageStyle} />
       )) || null}
@@ -159,7 +155,7 @@ const App = () => {
           </Text>
         </View>
       )) || (image && <Text style={styles.emptyText}>{label}</Text>) || (
-        <Text style={styles.emptyText}></Text>
+        <Text style={styles.emptyText}>Use below buttons to select a picture.</Text>
       )}
       <View style={styles.btn}>
         <TouchableOpacity
@@ -186,7 +182,6 @@ const styles = StyleSheet.create({
   },
   title: {
     alignSelf: 'center',
-    fontFamily: 'Lato_900Black',
     position: 'absolute',
     textAlign: 'center',
     fontSize: 50,
@@ -203,7 +198,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 40,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
   btnStyle: {
     backgroundColor: '#FFF',
@@ -256,7 +251,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'white',
     fontSize: 20,
-    maxWidth: '70%',
+    //maxWidth: '70%',
   },
 });
 
