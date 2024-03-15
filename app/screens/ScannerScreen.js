@@ -14,6 +14,7 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import Config from 'react-native-config';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Alert } from 'react-native';
 import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
 
 
@@ -28,7 +29,7 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [permission, setPermission] = useState(null);
-  const [fontsLoaded] = useFonts({Lato_900Black,});
+  const [fontsLoaded] = useFonts({ Lato_900Black, });
 
   useEffect(() => {
     (async () => {
@@ -60,18 +61,18 @@ const App = () => {
       console.log('Permission not granted for camera');
       return;
     }
-
+  
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         throw new Error('Permission denied for camera');
       }
-
-      const result = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
-      if (!result.cancelled && result.uri) {
-        const uri = result.uri;
+  
+      const cameraResult = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
+      if (!cameraResult.cancelled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
+        const uri = cameraResult.assets[0].uri;
         const path = uri.startsWith('file://') ? uri : 'file://' + uri;
-        getResult(path, result);
+        getResult(path, cameraResult);
       } else {
         console.log('User cancelled image picker or no image selected');
       }
@@ -79,23 +80,23 @@ const App = () => {
       console.error('Failed to launch camera:', error.message);
       Alert.alert('Error', 'Failed to launch camera');
     }
-  };
+  };  
 
   const manageCamera = async () => {
     if (!permission) {
       console.log('Permission not granted for camera');
       return;
     }
-
+  
     try {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         throw new Error('Permission denied for media library');
       }
-
+  
       const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
-      if (!result.cancelled && result.uri) {
-        const uri = result.uri;
+      if (!result.cancelled && result.assets.length > 0 && result.assets[0].uri) {
+        const uri = result.assets[0].uri;
         const path = uri.startsWith('file://') ? uri : 'file://' + uri;
         getResult(path, result);
       } else {
@@ -106,6 +107,7 @@ const App = () => {
       Alert.alert('Error', 'Failed to launch image library');
     }
   };
+  
 
   const getResult = async (path, response) => {
     setImage(path);
@@ -131,7 +133,7 @@ const App = () => {
   };
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>; 
+    return <Text>Loading...</Text>;
   }
 
   return (
@@ -139,11 +141,11 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ImageBackground
         source={require("../assets/SelectionScreen.png")}
-        style={{height: height, width: width}}
+        style={{ height: height, width: width }}
       />
       <Text style={styles.title}>{'Rice Disease \nPrediction'}</Text>
       {(image?.length && (
-        <Image source={{uri: image}} style={styles.imageStyle} />
+        <Image source={{ uri: image }} style={styles.imageStyle} />
       )) || null}
       {(result && label && (
         <View style={styles.mainOuter}>
@@ -159,8 +161,8 @@ const App = () => {
           </Text>
         </View>
       )) || (image && <Text style={styles.emptyText}>{label}</Text>) || (
-        <Text style={styles.emptyText}></Text>
-      )}
+          <Text style={styles.emptyText}></Text>
+        )}
       <View style={styles.btn}>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  clearImage: {height: 40, width: 40, tintColor: '#FFF'},
+  clearImage: { height: 40, width: 40, tintColor: '#FFF' },
   btn: {
     position: 'absolute',
     bottom: 40,
@@ -247,9 +249,9 @@ const styles = StyleSheet.create({
     top: height / 4.5,
   },
   space: { marginVertical: 10, marginHorizontal: 10 },
-  labelText: { color: '#FFF', fontSize: 20},
-  resultText: { fontSize: 32},
-  imageIcon: {height: 40, width: 40, tintColor: '#000'},
+  labelText: { color: '#FFF', fontSize: 20 },
+  resultText: { fontSize: 32 },
+  imageIcon: { height: 40, width: 40, tintColor: '#000' },
   emptyText: {
     position: 'absolute',
     top: height / 1.4,
