@@ -25,17 +25,17 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        top: 10
+        margintop: 10
     },
     progressbarView: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginBottom: '10%'
+        paddingBottom: '10%'
     },
     progressbar: {
         width: '50%',
-        height: '5%',
+        height: 40,
     }
 })
 

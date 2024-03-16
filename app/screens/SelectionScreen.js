@@ -28,7 +28,6 @@ function SelectionScreen(props) {
                     The spots on the leaf sheath and hulls are similar to those on the leaves.
                     When the glumes are infected,  a general black discoloration could be observed.
                     When the immature florets are attacked, grain development might het hindered or kernels that are of light weight or chalky may result.
-                    {"\n"}
                 </Text>
                 <Text style={styles.subHeader}>Why and where it occurs</Text>
                 <Text style={styles.content}>
@@ -37,6 +36,7 @@ function SelectionScreen(props) {
                     The fungus can survive in the seed for more than four years and can spread from plant to plant through air. Major sources of brown spot in the field include:
                 </Text>
                 <Text style={styles.content}>
+                {"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> infected seed{"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> volunteer rice{"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> infected rice debris{"\n"}

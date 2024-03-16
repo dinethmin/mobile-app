@@ -199,6 +199,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#16521F'
   },
   clearImage: { height: 40, width: 40, tintColor: '#FFF' },
   btn: {
