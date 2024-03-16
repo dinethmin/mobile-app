@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, ProgressBarAndroid, ProgressBarAndroidBase, StyleSheet, View } from 'react-native';
+import { ImageBackground, ProgressBarAndroid, ProgressBarAndroidBase, StyleSheet, View, Text } from 'react-native';
 
 function WelcomeScreen(props) {
     return (
@@ -8,6 +8,7 @@ function WelcomeScreen(props) {
             source={require("../assets/WelcomeScreen.png")}
         >
             <View style={styles.progressbarView}>
+                <Text style={styles.text}>loading...</Text>
                 <ProgressBarAndroid
                     style={styles.progressbar}
                     styleAttr='Horizontal'
@@ -21,6 +22,10 @@ function WelcomeScreen(props) {
 const styles = StyleSheet.create({
     bacground: {
         flex: 1
+    },
+    text: {
+        color: 'white',
+        top: 10
     },
     progressbarView: {
         flex: 1,
