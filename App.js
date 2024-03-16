@@ -12,7 +12,7 @@ export default function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowWelcomeScreen(false);
-    }, 3000); // Change 3000 to the desired delay time in milliseconds
+    }, 8000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -30,5 +30,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
- 
+
 });
