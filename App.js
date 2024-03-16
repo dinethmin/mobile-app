@@ -8,8 +8,8 @@ import NewLogo from './app/screens/newlogo';
 export default function App() {
   return (
     //<WelcomeScreen/>
-    //<SelectionScreen/>
-    <ScannernScreen/>
+    <SelectionScreen/>
+    //<ScannernScreen/>
     //<NewLogo/>
   );
 }
