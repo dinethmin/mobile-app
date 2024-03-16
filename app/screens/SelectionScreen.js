@@ -17,6 +17,7 @@ function SelectionScreen(props) {
                     Spots are present in plants at emergence; however, the disease is more prevalent as the plants approach maturity and the leaves begin to senesce.
                     It is a seed born disease.
                     Yield losses from leaf infection or leaf spots are probably not serious. Economic losses occur when the fungus attacks the panicle, including the grain.
+                    {"\n"}
                 </Text>
                 <Text style={styles.subHeader}>Symptoms</Text>
                 <Text style={styles.content}>
@@ -69,13 +70,14 @@ const styles = StyleSheet.create({
         top: 20,
         textAlign: 'left',
         fontWeight: 'bold',
-        fontStyle:'italic'
+        
     },
     content: {
         color: 'white',
         fontSize: 16,
         top: 22,
         textAlign: 'justify',
+        fontStyle:'italic'
     },
     container: {
         flex: 1,
