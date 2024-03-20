@@ -69,7 +69,7 @@ const App = () => {
       }
   
       const cameraResult = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
-      if (!cameraResult.cancelled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
+      if (!cameraResult.canceled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
         const uri = cameraResult.assets[0].uri;
         const path = uri.startsWith('file://') ? uri : 'file://' + uri;
         getResult(path, cameraResult);
@@ -95,7 +95,7 @@ const App = () => {
       }
   
       const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
-      if (!result.cancelled && result.assets.length > 0 && result.assets[0].uri) {
+      if (!result.canceled && result.assets.length > 0 && result.assets[0].uri) {
         const uri = result.assets[0].uri;
         const path = uri.startsWith('file://') ? uri : 'file://' + uri;
         getResult(path, result);
