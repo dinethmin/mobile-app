@@ -47,7 +47,7 @@ const App = () => {
 
   const apiUrl = Constants.expoConfig.extra?.URL;
 
-  const getPrediction = async (params) => {
+  const getPrediction = async params => {
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -57,6 +57,16 @@ const App = () => {
         },
         body: JSON.stringify(params),
       });
+      const responseText = await response.text();
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (error) {
+        console.error('Error parsing JSON response:', error);
+        return null;
+      }
+
+
       return await response.json();
     } catch (error) {
       setLabel('Failed to predict');
@@ -79,7 +89,7 @@ const App = () => {
 
       const cameraResult = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
       if (!cameraResult.canceled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
-        const uri = cameraResult.assets[0].uri;
+        const uri = cameraResult?.assets[0]?.uri;
         const path = uri.startsWith('file://') ? uri : 'file://' + uri;
         getResult(path, cameraResult);
       } else {
@@ -128,17 +138,12 @@ const App = () => {
       type: response.assets[0].type,
     };
     const res = await getPrediction(params);
-    if (res?.class) {
-      setLabel(res.class);
-      setResult(res.confidence);
+    if (res?.data?.class) {
+      setLabel(res.data.class);
+      setResult(res.data.confidence);
     } else {
       setLabel('Failed to predict');
     }
-  };
-
-  const clearOutput = () => {
-    setResult('');
-    setImage('');
   };
 
   if (!fontsLoaded) {
