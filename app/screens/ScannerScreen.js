@@ -12,13 +12,20 @@ import {
 } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import Config from 'react-native-config';
+import Constants from 'expo-constants';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Alert } from 'react-native';
 import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
 
-
 export const { height, width } = Dimensions.get('window');
+
+export const configureUrl = url => {
+  let authUrl = url;
+  if (url && url[url.length - 1] === '/') {
+    authUrl = url.substring(0, url.length - 1);
+  }
+  return authUrl;
+};
 
 const App = () => {
   const [result, setResult] = useState('');
@@ -38,9 +45,11 @@ const App = () => {
     })();
   }, []);
 
+  const apiUrl = Constants.expoConfig.extra?.URL;
+
   const getPrediction = async (params) => {
     try {
-      const response = await fetch(Config.URL, {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,13 +70,13 @@ const App = () => {
       console.log('Permission not granted for camera');
       return;
     }
-  
+
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         throw new Error('Permission denied for camera');
       }
-  
+
       const cameraResult = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
       if (!cameraResult.canceled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
         const uri = cameraResult.assets[0].uri;
@@ -80,20 +89,20 @@ const App = () => {
       console.error('Failed to launch camera:', error.message);
       Alert.alert('Error', 'Failed to launch camera');
     }
-  };  
+  };
 
   const manageCamera = async () => {
     if (!permission) {
       console.log('Permission not granted for camera');
       return;
     }
-  
+
     try {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         throw new Error('Permission denied for media library');
       }
-  
+
       const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
       if (!result.canceled && result.assets.length > 0 && result.assets[0].uri) {
         const uri = result.assets[0].uri;
@@ -107,7 +116,7 @@ const App = () => {
       Alert.alert('Error', 'Failed to launch image library');
     }
   };
-  
+
 
   const getResult = async (path, response) => {
     setImage(path);
@@ -135,6 +144,7 @@ const App = () => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
+
 
   return (
     <View style={[backgroundStyle, styles.outer]}>

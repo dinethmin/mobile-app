@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        margintop: 10
+        top: 10
     },
     progressbarView: {
         flex: 1,
