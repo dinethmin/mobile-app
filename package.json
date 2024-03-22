@@ -17,6 +17,7 @@
     "expo-barcode-scanner": "~12.9.3",
     "expo-camera": "~14.0.6",
     "expo-font": "~11.10.3",
+    "expo-image-manipulator": "~11.8.0",
     "expo-image-picker": "~14.7.1",
     "expo-permissions": "^14.4.0",
     "expo-status-bar": "~1.11.1",

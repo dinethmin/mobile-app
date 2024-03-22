@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra": {
+      "URL": "https://us-central1-alpine-life-415307.cloudfunctions.net/predict"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,6 +21,9 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "INTERNET"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
