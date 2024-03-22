@@ -16,6 +16,8 @@ import Constants from 'expo-constants';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Alert } from 'react-native';
 import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
+import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
+
 
 export const { height, width } = Dimensions.get('window');
 
@@ -129,22 +131,33 @@ const App = () => {
 
 
   const getResult = async (path, response) => {
-    setImage(path);
-    setLabel('Predicting...');
-    setResult('');
-    const params = {
-      uri: path,
-      name: response.assets[0].fileName,
-      type: response.assets[0].type,
-    };
-    const res = await getPrediction(params);
-    if (res?.data?.class) {
-      setLabel(res.data.class);
-      setResult(res.data.confidence);
-    } else {
+    try {
+      setImage(path);
+      setLabel('Predicting...');
+      setResult('');
+      const resizedImage = await manipulateAsync(
+        path,
+        [{ resize: { width: 256, height: 256 } }],
+        { compress: 1, format: 'jpeg', base64: true }
+      );
+      const params = {
+        uri: resizedImage.uri,
+        name: response.assets[0].fileName,
+        type: response.assets[0].type,
+      };
+      const res = await getPrediction(params);
+      if (res?.data?.class) {
+        setLabel(res.data.class);
+        setResult(res.data.confidence);
+      } else {
+        setLabel('Failed to predict');
+      }
+    } catch (error) {
+      console.error('Error resizing image:', error);
       setLabel('Failed to predict');
     }
   };
+  
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
