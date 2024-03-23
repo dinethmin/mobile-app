@@ -19,7 +19,6 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Alert } from 'react-native';
 import axios from 'axios';
 import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
-import SelectionScreen from './SelectionScreen';
 
 
 export const { height, width } = Dimensions.get('window');
