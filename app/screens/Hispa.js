@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Linking, ScrollView, Dimensions } from 'react-native';
 import { Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
 export const { height, width } = Dimensions.get('window');
 
@@ -60,8 +60,14 @@ function SelectionScreen(props) {
                 <Text style={styles.content1}>
                     {"\n"}
                     <Foundation name="telephone" size={20} color="white" /> +94 812 388331 / 32/ 34{"\n"}
-                    <Fontisto name="email" size={20} color="white" /> info@doa.gov.lk{"\n"}
-                    <Entypo name="location-pin" size={20} color="white" />Department of Agriculture, P.O.Box. 01,Peradeniya{"\n"}
+                    <Fontisto name="email" size={20} color="white" />
+                    <Text
+                        onPress={() => Linking.openURL('mailto:info@doa.gov.lk')}
+                        style={{ color: 'white' }}
+                    >
+                        {" "}info@doa.gov.lk{"\n"}
+                    </Text>
+                    <Entypo name="location-pin" size={20} color="white" /> Department of Agriculture, P.O.Box. 01, Peradeniya{"\n\n"}
                 </Text>
             </ScrollView>
         </View>
@@ -94,6 +100,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         top: 22,
         textAlign: 'justify',
+        fontStyle: 'italic'
+    },
+    content1: {
+        color: 'white',
+        fontSize: 16,
+        top: 22,
+        textAlign: 'left',
         fontStyle: 'italic'
     },
     container: {

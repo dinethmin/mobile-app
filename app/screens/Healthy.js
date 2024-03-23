@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Linking, ScrollView, Dimensions } from 'react-native';
 import { Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
 export const { height, width } = Dimensions.get('window');
 
@@ -10,41 +10,35 @@ function SelectionScreen(props) {
                 <Text style={styles.header}>Healthy</Text>
             </View>
             <ScrollView style={styles.ScrollViewStyle}>
-                <Text style={styles.subHeader}>Plant parts and life stages affected</Text>
+                <Text style={styles.subHeader}>The plant has no Disease and it is in a good condition{'\n'}</Text>
+                <Text style={styles.subHeader}>Cultivation Practices for Promoting Rice Health</Text>
                 <Text style={styles.content}>
-                    Coleoptiles, leaves, leaf sheath,
-                    immature florets, branches of the panicle, glumes, and grains are affected.
-                    Spots are present in plants at emergence; however, the disease is more prevalent as the plants approach maturity and the leaves begin to senesce.
-                    It is a seed born disease.
-                    Yield losses from leaf infection or leaf spots are probably not serious. Economic losses occur when the fungus attacks the panicle, including the grain.
+                    <Octicons name="dot-fill" size={15} color="white" /> Use high-quality seeds of healthy rice varieties with proven genetic traits for disease resistance, pest tolerance,
+                    and abiotic stress resilience. Certified seeds free from contaminants and pathogens ensure uniform germination and vigorous crop establishment.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Practice crop rotation with non-host crops to break disease cycles, suppress weed growth, and improve soil health.
+                    Rotate rice with legumes, cereals, or oilseeds to mitigate disease and pest pressure while enhancing soil fertility and structure.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Implement balanced fertilization practices based on soil nutrient analysis and crop nutrient requirements.
+                    Apply organic amendments, compost, and biofertilizers to improve soil fertility, enhance nutrient availability, and promote healthy plant growth.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Optimize water management practices to meet the moisture needs of rice plants while preventing waterlogging or drought stress.
+                    Implement efficient irrigation techniques such as flood irrigation, furrow irrigation, or
+                    drip irrigation to conserve water and minimize disease risks.
                     {"\n"}
                 </Text>
-                <Text style={styles.subHeader}>Symptoms</Text>
-                <Text style={styles.content}>
-                    The fungus causes brown, circular to oval spots on the coleoptiles which may lead to seedling blight.
-                    Seedling blight may cause sparse or inadequate stands and feeble plants.
-                    The spots are smaller on young leaves, than on upper leaves.
-                    Size and shape of the spots may vary from minute dark (dark brown to reddish brown) spots to large oval to circular spots (having dark brown margin and a light, reddish-brown or gray center).
-                    The spots on the leaf sheath and hulls are similar to those on the leaves.
-                    When the glumes are infected,  a general black discoloration could be observed.
-                    When the immature florets are attacked, grain development might het hindered or kernels that are of light weight or chalky may result.
-                </Text>
-                <Text style={styles.subHeader}>Why and where it occurs</Text>
-                <Text style={styles.content}>
-                    The disease can develop in areas with high relative humidity (86−100%) and temperature between 16 and 36°C. It is common in unflooded and nutrient-deficient soil, or in soils that accumulate toxic substances.
-                    For infection to occur, the leaves must be wet for 8−24 hours.
-                    The fungus can survive in the seed for more than four years and can spread from plant to plant through air. Major sources of brown spot in the field include:
-                </Text>
-                <Text style={styles.content}>
-                {"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> infected seed{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> volunteer rice{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> infected rice debris{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> weeds{"\n"}
-                </Text>
-                <Text style={styles.content}>
-                    Brown spot can occur at all crop stages, but the infection is most critical during maximum tillering up to the ripening stages of the crop.
+                <Text style={styles.subHeader}>For more details contact Department of Agriculture</Text>
+                <Text style={styles.content1}>
                     {"\n"}
+                    <Foundation name="telephone" size={20} color="white" /> +94 812 388331 / 32/ 34{"\n"}
+                    <Fontisto name="email" size={20} color="white" />
+                    <Text
+                        onPress={() => Linking.openURL('mailto:info@doa.gov.lk')}
+                        style={{ color: 'white' }}
+                    >
+                        {" "}info@doa.gov.lk{"\n"}
+                    </Text>
+                    <Entypo name="location-pin" size={20} color="white" /> Department of Agriculture, P.O.Box. 01, Peradeniya{"\n\n"}
                 </Text>
             </ScrollView>
         </View>
@@ -70,14 +64,21 @@ const styles = StyleSheet.create({
         top: 20,
         textAlign: 'left',
         fontWeight: 'bold',
-        
+
     },
     content: {
         color: 'white',
         fontSize: 16,
         top: 22,
         textAlign: 'justify',
-        fontStyle:'italic'
+        fontStyle: 'italic'
+    },
+    content1: {
+        color: 'white',
+        fontSize: 16,
+        top: 22,
+        textAlign: 'left',
+        fontStyle: 'italic'
     },
     container: {
         flex: 1,
