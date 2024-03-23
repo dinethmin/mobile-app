@@ -46,6 +46,19 @@ function SelectionScreen(props) {
                     Brown spot can occur at all crop stages, but the infection is most critical during maximum tillering up to the ripening stages of the crop.
                     {"\n"}
                 </Text>
+                <Text style={styles.subHeader}>For more details contact Department of Agriculture</Text>
+                <Text style={styles.content1}>
+                    {"\n"}
+                    <Foundation name="telephone" size={20} color="white" /> +94 812 388331 / 32/ 34{"\n"}
+                    <Fontisto name="email" size={20} color="white" />
+                    <Text
+                        onPress={() => Linking.openURL('info@doa.gov.lk')}
+                        style={{ color: 'white' }}
+                    >
+                        {" "}info@doa.gov.lk{"\n"}
+                    </Text>
+                    <Entypo name="location-pin" size={20} color="white" /> Department of Agriculture, P.O.Box. 01, Peradeniya{"\n\n"}
+                </Text>
             </ScrollView>
         </View>
     );
@@ -78,6 +91,13 @@ const styles = StyleSheet.create({
         top: 22,
         textAlign: 'justify',
         fontStyle:'italic'
+    },
+    content1: {
+        color: 'white',
+        fontSize: 16,
+        top: 22,
+        textAlign: 'left',
+        fontStyle: 'italic'
     },
     container: {
         flex: 1,
