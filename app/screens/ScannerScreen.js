@@ -3,10 +3,12 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  Button,
   TouchableOpacity,
   View,
   useColorScheme,
   Image,
+  Platform,
   ImageBackground,
   Dimensions,
 } from 'react-native';
@@ -15,8 +17,9 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Alert } from 'react-native';
+import axios from 'axios';
 import { useFonts, Lato_900Black } from '@expo-google-fonts/lato';
-import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
+import SelectionScreen from './SelectionScreen';
 
 
 export const { height, width } = Dimensions.get('window');
@@ -29,7 +32,7 @@ export const configureUrl = url => {
   return authUrl;
 };
 
-const App = () => {
+const App = ({ navigation }) => {
   const [result, setResult] = useState('');
   const [label, setLabel] = useState('');
   const [image, setImage] = useState('');
@@ -49,34 +52,6 @@ const App = () => {
 
   const apiUrl = Constants.expoConfig.extra?.URL;
 
-  const getPrediction = async params => {
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(params),
-      });
-      const responseText = await response.text();
-      let responseData;
-      try {
-        responseData = JSON.parse(responseText);
-      } catch (error) {
-        console.error('Error parsing JSON response:', error);
-        return null;
-      }
-
-
-      return await response.json();
-    } catch (error) {
-      setLabel('Failed to predict');
-      console.error('Prediction error:', error);
-      return null;
-    }
-  };
-
   const handleCameraPress = async () => {
     if (!permission) {
       console.log('Permission not granted for camera');
@@ -92,7 +67,7 @@ const App = () => {
       const cameraResult = await ImagePicker.launchCameraAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
       if (!cameraResult.canceled && cameraResult.assets.length > 0 && cameraResult.assets[0].uri) {
         const uri = cameraResult?.assets[0]?.uri;
-        const path = uri.startsWith('file://') ? uri : 'file://' + uri;
+        const path = Platform.OS !== 'ios' ? uri : 'file://' + uri;
         getResult(path, cameraResult);
       } else {
         console.log('User cancelled image picker or no image selected');
@@ -118,7 +93,7 @@ const App = () => {
       const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.Images });
       if (!result.canceled && result.assets.length > 0 && result.assets[0].uri) {
         const uri = result.assets[0].uri;
-        const path = uri.startsWith('file://') ? uri : 'file://' + uri;
+        const path = Platform.OS !== 'ios' ? uri : 'file://' + uri;
         getResult(path, result);
       } else {
         console.log('User cancelled image picker or no image selected');
@@ -135,17 +110,24 @@ const App = () => {
       setImage(path);
       setLabel('Predicting...');
       setResult('');
-      const resizedImage = await manipulateAsync(
-        path,
-        [{ resize: { width: 256, height: 256 } }],
-        { compress: 1, format: 'jpeg', base64: true }
-      );
-      const params = {
-        uri: resizedImage.uri,
-        name: response.assets[0].fileName,
-        type: response.assets[0].type,
+
+      const file = {
+        uri: path,
+        name: 'temp.jpg',
+        type: 'image/jpeg',
       };
-      const res = await getPrediction(params);
+
+      const bodyFormData = new FormData();
+      bodyFormData.append('file', file);
+
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const res = await axios.post(apiUrl, bodyFormData, config);
+
       if (res?.data?.class) {
         setLabel(res.data.class);
         setResult(res.data.confidence);
@@ -153,11 +135,11 @@ const App = () => {
         setLabel('Failed to predict');
       }
     } catch (error) {
-      console.error('Error resizing image:', error);
+      console.error('Error sending image data:', error);
       setLabel('Failed to predict');
     }
   };
-  
+
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
@@ -187,6 +169,24 @@ const App = () => {
               {parseFloat(result).toFixed(2) + '%'}
             </Text>
           </Text>
+          <View style={styles.subOuter}>
+            <Button
+              title="Learn More -->"
+              onPress={ () =>{
+                if(label === "BrownSpot"){
+                  navigation.navigate('SelectionScreen')
+                }else if(label === "Healthy"){
+                  navigation.navigate('Healthy')
+                }else if(label === "LeafBlast"){
+                  navigation.navigate('LeafBlast')
+                }else if(label === "Hispa"){
+                  navigation.navigate('Hispa')
+                }
+              }
+              }
+            />
+          </View>
+
         </View>
       )) || (image && <Text style={styles.emptyText}>{label}</Text>) || (
           <Text style={styles.emptyText}></Text>
@@ -258,6 +258,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: height / 1.6,
     alignSelf: 'center',
+  },
+  subOuter: {
+    position: 'absolute',
+    marginLeft: 90,
+    top: 100,
+    alignSelf: 'flex-end',
   },
   clearStyle: {
     position: 'relative',
