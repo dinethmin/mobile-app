@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
     ScrollViewStyle: {
         flex: 1,
         height: height,
-        width: width
+        width: width,
+        padding: 8
     }
 })
 
