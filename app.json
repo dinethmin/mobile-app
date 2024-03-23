@@ -12,7 +12,10 @@
       "backgroundColor": "#ffffff"
     },
     "extra": {
-      "URL": "https://us-central1-alpine-life-415307.cloudfunctions.net/predict"
+      "URL": "https://us-central1-alpine-life-415307.cloudfunctions.net/predict",
+      "eas": {
+        "projectId": "24b8fdd1-eb17-4ce8-89a8-505abb3ecc0c"
+      }
     },
     "assetBundlePatterns": [
       "**/*"
@@ -27,7 +30,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ricediseasedetection.mobileapp"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
