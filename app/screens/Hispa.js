@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
-import {Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
+import { Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
 export const { height, width } = Dimensions.get('window');
 
 function SelectionScreen(props) {
@@ -40,16 +40,21 @@ function SelectionScreen(props) {
                     They create characteristic 'window-pane' feeding damage by scraping the leaf surface, resulting in translucent patches.
                     Severe infestations can lead to reduced plant vigor, stunted growth, and even crop loss if not controlled.
                 </Text>
-                <Text style={styles.subHeader}>If the crop is infected, apply these for the next season</Text>
+                <Text style={styles.subHeader}>How to manage Hispa infection</Text>
                 <Text style={styles.content1}>
                     {"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Application of organic fertilizer will increase the soil quality{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Use of certified seed paddy free from the disease{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Addition of burnt paddy husk (250 kg per acre) to the soil during land preparation.{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Abstain addition of disease infected straw.{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Treatment of seed paddy by dipping in hot water (53-54OC) for 10-12 minutes{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Treatment of seeds with a seed-protectant fungicide{"\n"}
-                    <Octicons name="dot-fill" size={15} color="white" /> Crop rotation{"\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Implement cultural practices such as maintaining proper field hygiene,
+                    crop rotation, and timely sowing to minimize Hispa infestation.
+                    Avoid waterlogging in the field, as it can create favorable conditions for Hispa development.
+                    {"\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Encourage natural predators and parasites of Hispa, such as ladybird beetles,
+                    spiders, and certain parasitic wasps.
+                    Introducing beneficial insects or using biopesticides derived from natural enemies can help suppress Hispa populations.
+                    {"\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Apply insecticides recommended for controlling Hispa,
+                    ensuring proper timing and dosage according to label instructions.
+                    {"\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Planting rice varieties resistant or tolerant to Hispa can help mitigate damage.{"\n"}
                 </Text>
                 <Text style={styles.subHeader}>For more details contact Department of Agriculture</Text>
                 <Text style={styles.content1}>
@@ -100,7 +105,8 @@ const styles = StyleSheet.create({
     ScrollViewStyle: {
         flex: 1,
         height: height,
-        width: width
+        width: width,
+        padding: 8
     }
 })
 

@@ -10,24 +10,35 @@ function SelectionScreen(props) {
                 <Text style={styles.header}>LeafBlast</Text>
             </View>
             <ScrollView style={styles.ScrollViewStyle}>
+                <Text style={styles.subHeader}>What is Leaf Blast?</Text>
+                <Text style={styles.content}>
+                    Leaf Blast, also known as Rice blast, is a destructive fungal disease that affects rice crops.
+                    It is caused by the fungus Magnaporthe oryzae.
+                    Leaf Blast primarily affects the leaves of rice plants but can also infect other aerial parts,
+                    including stems, panicles, and nodes.
+                    {"\n"}
+                </Text>
                 <Text style={styles.subHeader}>Plant parts and life stages affected</Text>
                 <Text style={styles.content}>
-                    Coleoptiles, leaves, leaf sheath,
-                    immature florets, branches of the panicle, glumes, and grains are affected.
-                    Spots are present in plants at emergence; however, the disease is more prevalent as the plants approach maturity and the leaves begin to senesce.
-                    It is a seed born disease.
-                    Yield losses from leaf infection or leaf spots are probably not serious. Economic losses occur when the fungus attacks the panicle, including the grain.
-                    {"\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Any life stage of the plant could infects by this pathogen.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Plant parts that are infected could be, leaves, nodes, panicles, or seeds.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" /> Rice blast is named as leaf blast, nodael blast, panicle blast, or neck blast, based on the part of the plant infected.{"\n"}
                 </Text>
                 <Text style={styles.subHeader}>Symptoms</Text>
                 <Text style={styles.content}>
-                    The fungus causes brown, circular to oval spots on the coleoptiles which may lead to seedling blight.
-                    Seedling blight may cause sparse or inadequate stands and feeble plants.
-                    The spots are smaller on young leaves, than on upper leaves.
-                    Size and shape of the spots may vary from minute dark (dark brown to reddish brown) spots to large oval to circular spots (having dark brown margin and a light, reddish-brown or gray center).
-                    The spots on the leaf sheath and hulls are similar to those on the leaves.
-                    When the glumes are infected,  a general black discoloration could be observed.
-                    When the immature florets are attacked, grain development might het hindered or kernels that are of light weight or chalky may result.
+                    <Octicons name="dot-fill" size={15} color="white" />  Spindle-shaped leaf spots with brown or reddish margins, ashy centers, and pointed ends are the common symptom.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" />  Fully developed lesions normally measure 1.0-1.5 cm in length and 0.3-0.5cm in breadth.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" />  When nodes are infected, they become black and rot.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" />  Infection of panicle base causes rotten neck or neck rot and causes the panicle to fall off.
+                    {"\n\n"}
+                    <Octicons name="dot-fill" size={15} color="white" />  When the infection is severe, secondary branches and grains are also affected resulting in partly filled grains, known as “whiteheads”.
+                    Characteristics vary with the crop life stage, susceptibility level of the cultivar and environmental factors.
+                    {"\n"}
                 </Text>
                 <Text style={styles.subHeader}>Why and where it occurs</Text>
                 <Text style={styles.content}>
@@ -36,7 +47,7 @@ function SelectionScreen(props) {
                     The fungus can survive in the seed for more than four years and can spread from plant to plant through air. Major sources of brown spot in the field include:
                 </Text>
                 <Text style={styles.content}>
-                {"\n"}
+                    {"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> infected seed{"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> volunteer rice{"\n"}
                     <Octicons name="dot-fill" size={15} color="white" /> infected rice debris{"\n"}
@@ -70,14 +81,14 @@ const styles = StyleSheet.create({
         top: 20,
         textAlign: 'left',
         fontWeight: 'bold',
-        
+
     },
     content: {
         color: 'white',
         fontSize: 16,
         top: 22,
         textAlign: 'justify',
-        fontStyle:'italic'
+        fontStyle: 'italic'
     },
     container: {
         flex: 1,
@@ -88,7 +99,8 @@ const styles = StyleSheet.create({
     ScrollViewStyle: {
         flex: 1,
         height: height,
-        width: width
+        width: width,
+        padding: 8
     }
 })
 
