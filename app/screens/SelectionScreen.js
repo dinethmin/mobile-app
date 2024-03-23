@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Linking, ScrollView, Dimensions } from 'react-native';
 import { Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
 export const { height, width } = Dimensions.get('window');
 
@@ -63,7 +63,7 @@ function SelectionScreen(props) {
                     <Foundation name="telephone" size={20} color="white" /> +94 812 388331 / 32/ 34{"\n"}
                     <Fontisto name="email" size={20} color="white" />
                     <Text
-                        onPress={() => Linking.openURL('info@doa.gov.lk')}
+                        onPress={() => Linking.openURL('mailto:info@doa.gov.lk')}
                         style={{ color: 'white' }}
                     >
                         {" "}info@doa.gov.lk{"\n"}
