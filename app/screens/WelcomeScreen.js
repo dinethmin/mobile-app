@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, ProgressBarAndroid, ProgressBarAndroidBase, StyleSheet, View, Text } from 'react-native';
+import { ImageBackground, ProgressBarAndroid, StyleSheet, View, Text } from 'react-native';
 
 function WelcomeScreen(props) {
     return (
