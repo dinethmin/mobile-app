@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, Dimensions } from 'react-native';
-import { Octicons } from '@expo/vector-icons';
+import { Octicons, Entypo, Foundation, Fontisto } from '@expo/vector-icons';
 export const { height, width } = Dimensions.get('window');
 
 function SelectionScreen(props) {
