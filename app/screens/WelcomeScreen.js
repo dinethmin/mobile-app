@@ -1,7 +1,8 @@
 import React from 'react';
 import { ImageBackground, ProgressBarAndroid, StyleSheet, View, Text } from 'react-native';
+import {ProgressBar} from '@react-native-community/progress-bar-android';
 
-function WelcomeScreen(props) {
+function WelcomeScreen() {
     return (
         <ImageBackground
             style={styles.bacground}

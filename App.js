@@ -9,8 +9,14 @@ import ScannerScreen from './app/screens/ScannerScreen';
 import Healthy from './app/screens/Healthy';
 import LeafBlast from './app/screens/LeafBlast';
 import Hispa from './app/screens/Hispa';
+import { LogBox } from 'react-native';
+
+// Ignore specific warning in WelcomeScreen
+LogBox.ignoreLogs(['ProgressBarAndroid has been extracted']);
+
 
 const Stack = createStackNavigator();
+
 
 export default function App() {
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
@@ -62,7 +68,7 @@ export default function App() {
           </>
         )}
       </Stack.Navigator>
-      <StatusBar style="auto" /> 
+      <StatusBar style="auto" />
     </NavigationContainer>
   );
 }
